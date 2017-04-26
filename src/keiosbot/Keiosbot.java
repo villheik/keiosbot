@@ -55,7 +55,7 @@ public class Keiosbot {
             Board.refreshBoard(map);
             API.sendGet(keiosbot.getName(), keiosbot.getPass(), keiosbot.getType(), "move");
             try{
-                Thread.sleep(turnDuration);
+                Thread.sleep(turnDuration / 2);
             }
             catch (InterruptedException e){
                 e.printStackTrace();

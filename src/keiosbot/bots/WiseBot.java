@@ -5,16 +5,12 @@
  */
 package keiosbot.bots;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import keiosbot.Board;
-import keiosbot.API;
-import keiosbot.bots.RandomBot;
 /**
  *
  * @author keios
@@ -77,6 +73,21 @@ public class WiseBot {
         int score = 50;
         String currentpos = Board.getNextPosition(move);
         
+        //Avoid monsters
+        ArrayList<String> monsters = Board.getMonsters();
+        int monsterDist = 0;
+        int newMonsterDist;
+        for (int i = 0; i < monsters.size(); i++){
+            newMonsterDist = manhattanDistance(monsters.get(i), currentpos);
+            //if a monster is really close, give this move a really bad score
+            if (newMonsterDist < 3){
+                return newMonsterDist;
+            }
+            else{
+                monsterDist += newMonsterDist * 3;
+            }
+          
+        }
         //Value attacking other players twice as much as getting treasure
         ArrayList<String> otherPlayers = Board.getOtherPlayers();
         int playerDist = 1000;

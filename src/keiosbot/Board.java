@@ -160,6 +160,18 @@ public class Board {
         return otherPlayers;
     }
     
+    public static ArrayList<String> getMonsters(){
+         ArrayList<String> monsters = new ArrayList<>();
+        for (int y = 0; y < parsedBoard.length; y++){
+            for (int x = 0; x < parsedBoard[y].length; x++){
+                if (parsedBoard[y][x] == 'e'){                                   
+                    monsters.add(x + "," + y);
+                }
+            }
+        }
+        return monsters;
+    }
+    
     public static String checkForAttack() throws NumberFormatException{
         String pos[] = getCurrentPosition().split(",");
         int x = Integer.parseInt(pos[0]);
