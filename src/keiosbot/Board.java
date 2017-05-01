@@ -16,6 +16,7 @@ import java.util.Map;
  */
 public class Board {
     private static char[][] parsedBoard;
+    private static Map<String, Tile> tiles = new HashMap<String, Tile>();
     
     public Board(String boardstring){
         final String[] rows = boardstring.split("\n");
@@ -23,7 +24,13 @@ public class Board {
         int x = rows[0].length();
 
         Board.parsedBoard = new char[y][x];
+        
     }
+    
+    public static char[][] getBoard(){
+        return parsedBoard;
+    }
+    
     public static void refreshBoard(String boardstring){
         final String[] rows = boardstring.split("\n");
         
@@ -32,43 +39,46 @@ public class Board {
             
             for (int x = 0; x < chars.length; x++){
                 parsedBoard[y][x] = chars[x];
+                String coords = Integer.toString(x) + "," + Integer.toString(y);
+                Tile tile = new Tile(chars[x], coords);
+                tiles.put(coords, new Tile(chars[x], coords));
             }
         }
     }
     
     private static char north(int x, int y){
-        try{
+        if (x >= 0 && x < parsedBoard[0].length && y >= 0 && y < parsedBoard.length){
             return parsedBoard[y-1][x];
         }
-        catch (ArrayIndexOutOfBoundsException e){
+        else{
             return 'F';
         }
     }
     
     private static char south(int x, int y){
-        try{
+        if (x >= 0 && x < parsedBoard[0].length && y >= 0 && y < parsedBoard.length){
             return parsedBoard[y+1][x];
         }
-        catch (ArrayIndexOutOfBoundsException e){
+        else{
             return 'F';
         }
     }
     
     private static char east(int x, int y){
-        try{
+        if (x >= 0 && x < parsedBoard[0].length && y >= 0 && y < parsedBoard.length){
             return parsedBoard[y][x+1];
         }
-        catch(ArrayIndexOutOfBoundsException e){
+        else{
             return 'F';
         }
         
     }
     
     private static char west(int x, int y){
-        try{
+        if (x >= 0 && x < parsedBoard[0].length && y >= 0 && y < parsedBoard.length){
             return parsedBoard[y][x-1];
         }
-        catch(ArrayIndexOutOfBoundsException e){
+        else{
             return 'F';
         }
     }
@@ -191,6 +201,15 @@ public class Board {
         }
         
         return "no";
+    }
+
+    public static Tile getTile(String coord){
+        if (tiles.containsKey(coord)){
+            return tiles.get(coord);
+        }
+        else{
+            return null;
+        }
     }
     
 }//class

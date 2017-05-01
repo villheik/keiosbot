@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+import keiosbot.bots.BFSbot;
 import keiosbot.bots.RandomBot;
 import keiosbot.bots.WiseBot;
 
@@ -58,6 +60,10 @@ public class API {
                         break;
                     case "wise":
                         direction = WiseBot.getAction();
+                        break;
+                    case "BFS":
+                        List<String> actions = BFSbot.getActions();
+                        direction = actions.get(actions.size() - 1);
                         break;
                     default:
                         direction = "north";

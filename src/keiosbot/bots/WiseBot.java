@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import keiosbot.Board;
+import keiosbot.ManhattanDistance;
 /**
  *
  * @author keios
@@ -78,22 +79,22 @@ public class WiseBot {
         int monsterDist = 0;
         int newMonsterDist;
         for (int i = 0; i < monsters.size(); i++){
-            newMonsterDist = manhattanDistance(monsters.get(i), currentpos);
+            newMonsterDist = ManhattanDistance.manhattanDistance(monsters.get(i), currentpos);
             //if a monster is really close, give this move a really bad score
-            if (newMonsterDist < 3){
+            if (newMonsterDist < 5){
                 return newMonsterDist;
             }
             else{
-                monsterDist += newMonsterDist * 3;
+                monsterDist += newMonsterDist / 2;
             }
-          
+        
         }
         //Value attacking other players twice as much as getting treasure
         ArrayList<String> otherPlayers = Board.getOtherPlayers();
         int playerDist = 1000;
         int newPlayerDist;
         for (int i = 0; i < otherPlayers.size(); i++){
-            newPlayerDist = manhattanDistance(otherPlayers.get(i), currentpos);
+            newPlayerDist = ManhattanDistance.manhattanDistance(otherPlayers.get(i), currentpos);
             if (newPlayerDist < playerDist){
                 playerDist = newPlayerDist;
             }
@@ -111,7 +112,7 @@ public class WiseBot {
         int treasureDist = 1000;
         int newTreasureDist;
         for (int i = 0; i < treasures.size(); i++){
-            newTreasureDist = manhattanDistance(treasures.get(i), currentpos);
+            newTreasureDist = ManhattanDistance.manhattanDistance(treasures.get(i), currentpos);
             if (newTreasureDist < treasureDist) {
                 treasureDist = newTreasureDist;
             }
@@ -120,16 +121,5 @@ public class WiseBot {
         return score;
     }
     
-    public static int manhattanDistance(String target, String current){
-        String currentpos[] = current.split(",");
-        String targetpos[] = target.split(",");
-        
-        int currentY = Integer.parseInt(currentpos[0]);
-        int currentX = Integer.parseInt(currentpos[1]);
-        int targetY = Integer.parseInt(targetpos[0]);
-        int targetX = Integer.parseInt(targetpos[1]);
-        
-        int distance = Math.abs(targetY - currentY) + Math.abs(targetX - currentX);
-        return distance;
-    }
+    
 }
