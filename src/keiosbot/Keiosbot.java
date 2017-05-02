@@ -37,11 +37,11 @@ public class Keiosbot {
      */
     public static void main(String[] args) throws Exception{
         Keiosbot keiosbot = new Keiosbot("keios", "aaa", "wise");
-        Keiosbot shitbot = new Keiosbot("random", "aaa", "random");
+        Keiosbot randombot = new Keiosbot("random", "aaa", "random");
         String map = API.sendGet(keiosbot.getName(), keiosbot.getPass(), keiosbot.getType(), "getboard");
         new Board(map);
         new Thread(() -> run(keiosbot)).start();
-        new Thread(() -> run(shitbot)).start();
+        new Thread(() -> run(randombot)).start();
     }
     
     public static void run(Keiosbot keiosbot){
