@@ -36,14 +36,14 @@ public class Keiosbot {
      * @param args komentoriviargumentit
      */
     public static void main(String[] args) throws Exception{
-        // Keiosbot keiosbot = new Keiosbot("keios", "aaa", "wise");
-        // Keiosbot shitbot = new Keiosbot("random", "aaa", "random");
-        Keiosbot BFSbot = new Keiosbot("bfs", "aaa", "BFS");
-        String map = API.sendGet(BFSbot.getName(), BFSbot.getPass(), BFSbot.getType(), "getboard");
+        Keiosbot keiosbot = new Keiosbot("keios", "aaa", "wise");
+        // Keiosbot randombot = new Keiosbot("random", "aaa", "random");
+        //Keiosbot BFSbot = new Keiosbot("bfs", "aaa", "BFS");
+        String map = API.sendGet(keiosbot.getName(), keiosbot.getPass(), keiosbot.getType(), "getboard");
         new Board(map);
-        // new Thread(() -> run(keiosbot)).start();
-        // new Thread(() -> run(shitbot)).start();
-        new Thread(() -> run(BFSbot)).start();
+        new Thread(() -> run(keiosbot)).start();
+        // new Thread(() -> run(randombot)).start();
+        //new Thread(() -> run(BFSbot)).start();
     }
     
     public static void run(Keiosbot keiosbot){

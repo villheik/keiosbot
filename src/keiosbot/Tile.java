@@ -80,7 +80,7 @@ public class Tile {
             neighbour = Board.getTile(coord);
 
             if (neighbour == null){
-                neighbour = new Tile(board[this.xCoord + 1][this.yCoord], coord);
+                neighbour = new Tile(board[this.yCoord][this.xCoord + 1], coord);
             }                   
             this.neighbours.add(neighbour);
         }
@@ -90,7 +90,7 @@ public class Tile {
             neighbour = Board.getTile(coord);
             
             if (neighbour == null){
-                neighbour = new Tile(board[this.xCoord - 1][this.yCoord], coord);
+                neighbour = new Tile(board[this.yCoord][this.xCoord - 1], coord);
             }
             this.neighbours.add(neighbour);
         }
@@ -100,7 +100,7 @@ public class Tile {
             neighbour = Board.getTile(coord);
             
             if (neighbour == null){
-                neighbour = new Tile(board[this.xCoord][this.yCoord + 1], coord);              
+                neighbour = new Tile(board[this.yCoord + 1][this.xCoord], coord);              
             }
             this.neighbours.add(neighbour);
             
@@ -111,18 +111,17 @@ public class Tile {
             neighbour = Board.getTile(coord);
             
             if (neighbour == null){
-                neighbour = new Tile(board[this.xCoord][this.yCoord - 1], coord);
+                neighbour = new Tile(board[this.yCoord - 1][this.xCoord], coord);
             }
             this.neighbours.add(neighbour);          
         }       
     }
     
     public boolean checkNeighbour(int x, int y, char[][] board){
-        //assumes that board is a rectangle
-        if (x >= 0 && x < board[0].length && y >= 0 && y < board.length){
-            if (board[this.yCoord][this.xCoord] != '#' && board[this.yCoord][this.xCoord] != ' '){
+        if ((y >= 0) && (y < board.length)&& (x >= 0) && (x < board[y].length)){
+            if (board[y][x] != '#' && board[y][x] != ' '){
                 return true;
-            }
+            }          
         }
         return false;
     }

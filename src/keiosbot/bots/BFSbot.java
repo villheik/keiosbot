@@ -35,6 +35,10 @@ public class BFSbot {
             startTile = new Tile(Board.getBoard()[yCoord][xCoord], position);
         }
         List<String> actions = BFS.bfs(startTile);
+        if (actions.isEmpty()){
+            actions.add(RandomBot.randomDirection());
+            return actions;
+        }
         return actions;       
     }
 }

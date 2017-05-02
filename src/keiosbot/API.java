@@ -63,7 +63,7 @@ public class API {
                         break;
                     case "BFS":
                         List<String> actions = BFSbot.getActions();
-                        direction = actions.get(actions.size() - 1);
+                        direction = actions.remove(actions.size() - 1);
                         break;
                     default:
                         direction = "north";

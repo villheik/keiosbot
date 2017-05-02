@@ -30,14 +30,13 @@ public class BFS {
             }
             
             Tile childTile;
-            System.out.println("111");
             while((childTile=tile.getUnvisitedNeighbour()) != null){
                 childTile.setIfVisited(true);
                 moves.add(tile.getDirection(childTile));
                 queue.add(childTile);
-                System.out.println("asd");
             }
         }
-        return null;
+        //return empty list
+        return new ArrayList<>();
     }
 }

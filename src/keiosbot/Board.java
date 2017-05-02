@@ -23,8 +23,7 @@ public class Board {
         int y = rows.length;
         int x = rows[0].length();
 
-        Board.parsedBoard = new char[y][x];
-        
+        Board.parsedBoard = new char[y][x];       
     }
     
     public static char[][] getBoard(){
@@ -41,7 +40,8 @@ public class Board {
                 parsedBoard[y][x] = chars[x];
                 String coords = Integer.toString(x) + "," + Integer.toString(y);
                 Tile tile = new Tile(chars[x], coords);
-                tiles.put(coords, new Tile(chars[x], coords));
+                tile.addNeighbours(parsedBoard);
+                tiles.put(coords, tile);
             }
         }
     }
